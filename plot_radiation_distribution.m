@@ -3,39 +3,39 @@ close all
 clc;
 
 % Energy-deposition distribution
-A=load('F:\²©Ê¿¿ÎÌâÑĞ¾¿\ÈÈÉù³ÉÏñ-ÈËÌåÈıÎ¬¼ÁÁ¿½¨Ä£\X¹âÉù³ÉÏñÊıÖµ·ÂÕæ\MC Simulation\Geant4 data\Á£×ÓÊı800000000(¿í¶È3.5cm)\certain_plane.txt');
+A=load('F:\çƒ­å£°æˆåƒ-äººä½“ä¸‰ç»´å‰‚é‡å»ºæ¨¡\Xå…‰å£°æˆåƒæ•°å€¼ä»¿çœŸ\MC Simulation\Geant4 data\ç²’å­æ•°800000000(å®½åº¦3.5cm)\certain_plane.txt'); % æ¢æˆè‡ªå·±çš„æ–‡ä»¶å¤¹è·¯å¾„!!!!
 
 % Dose distribution
-Density_matrix=ones(120, 120)*1000; % ¶¨ÒåÒ»¸öÎ¬¶ÈÎª120*120µÄÈ«1¾ØÕó
-Density_matrix(54:67,21:100)=Density_matrix(54:67,21:100)*11.3437;  % Ç¦¸ËÇøÓòÃÜ¶ÈÎª11.3437Ç§¿Ë/Á¢·½Ã×
-Dose =(A*1.6021892*1e-13)./(Density_matrix*0.0025*0.0025*0.0025);% ÇøÓò¼ÁÁ¿·Ö²¼Çé¿ö(Gy)
+Density_matrix=ones(120, 120)*1000; % å®šä¹‰ä¸€ä¸ªç»´åº¦ä¸º120*120çš„å…¨1çŸ©é˜µ
+Density_matrix(54:67,21:100)=Density_matrix(54:67,21:100)*11.3437;  % é“…æ†åŒºåŸŸå¯†åº¦ä¸º11.3437åƒå…‹/ç«‹æ–¹ç±³
+Dose =(A*1.6021892*1e-13)./(Density_matrix*0.0025*0.0025*0.0025);% åŒºåŸŸå‰‚é‡åˆ†å¸ƒæƒ…å†µ(Gy)
 
 % Dose-XA signal relation
-Water_density = 1000; % Ë®µÄÃÜ¶È 1000 kg /m3
-Water_sound = 1500;    % Ë®µÄ´«²¥ÉùËÙÎª 1500 m /s
-Water_thermal_expansion_coefficient = 210 * 1e-6; % Ë®µÄÌå»ıÈÈÅòÕÍÏµÊıÎª 210 * 1e-6
-Water_specific_heat_capacity = 4181; % Ë®µÄ±ÈÈÈÈİ 4181 J/( kg¡¤K)
+Water_density = 1000; % æ°´çš„å¯†åº¦ 1000 kg /m3
+Water_sound = 1500;    % æ°´çš„ä¼ æ’­å£°é€Ÿä¸º 1500 m /s
+Water_thermal_expansion_coefficient = 210 * 1e-6; % æ°´çš„ä½“ç§¯çƒ­è†¨èƒ€ç³»æ•°ä¸º 210 * 1e-6
+Water_specific_heat_capacity = 4181; % æ°´çš„æ¯”çƒ­å®¹ 4181 J/( kgÂ·K)
 
-Lead_density = 11.3437*1e3; % Ç¦µÄÃÜ¶È 11.3437 g /cm3
-Lead_sound = 1960; % Ç¦µÄ´«²¥ÉùËÙÎª 1960 m /s
-Lead_thermal_expansion_coefficient = 87 * 1e-6;% Ç¦µÄÌå»ıÈÈÅòÕÍÏµÊıÎª 87 ¡Á e-6,ÏßĞÔÈÈÅòÕÍÏµÊıÎª29 ¡Á  e-6
-Lead_specific_heat_capacity = 127; % Ç¦µÄ±ÈÈÈÈİ 127 J/( kg¡¤K)
+Lead_density = 11.3437*1e3; % é“…çš„å¯†åº¦ 11.3437 g /cm3
+Lead_sound = 1960; % é“…çš„ä¼ æ’­å£°é€Ÿä¸º 1960 m /s
+Lead_thermal_expansion_coefficient = 87 * 1e-6;% é“…çš„ä½“ç§¯çƒ­è†¨èƒ€ç³»æ•°ä¸º 87 Ã— e-6,çº¿æ€§çƒ­è†¨èƒ€ç³»æ•°ä¸º29 Ã—  e-6
+Lead_specific_heat_capacity = 127; % é“…çš„æ¯”çƒ­å®¹ 127 J/( kgÂ·K)
 
-Water_Gruneisen_coefficient = Water_sound*Water_sound*Water_thermal_expansion_coefficient/Water_specific_heat_capacity; % ¸ñÂÉÄËÉ­³£Êı
-Lead_Gruneisen_coefficient = Lead_sound*Lead_sound*Lead_thermal_expansion_coefficient/Lead_specific_heat_capacity; % ¸ñÂÉÄËÉ­³£Êı
+Water_Gruneisen_coefficient = Water_sound*Water_sound*Water_thermal_expansion_coefficient/Water_specific_heat_capacity; % æ ¼å¾‹ä¹ƒæ£®å¸¸æ•°
+Lead_Gruneisen_coefficient = Lead_sound*Lead_sound*Lead_thermal_expansion_coefficient/Lead_specific_heat_capacity; % æ ¼å¾‹ä¹ƒæ£®å¸¸æ•°
 
-Acoustic_pressure = ones(120, 120)*Water_Gruneisen_coefficient; % ¶¨ÒåÒ»¸öÎ¬¶ÈÎª120*120µÄÈ«1¾ØÕó
-Acoustic_pressure(54:67,21:100) = Lead_Gruneisen_coefficient;  % Ç¦¸ËÇøÓòÃÜ¶ÈÎª11.3437Ç§¿Ë/Á¢·½Ã×
-Acoustic_pressure = Acoustic_pressure.* Density_matrix.* Dose; % ÉùÑ¹·Ö²¼Çé¿ö
+Acoustic_pressure = ones(120, 120)*Water_Gruneisen_coefficient; % å®šä¹‰ä¸€ä¸ªç»´åº¦ä¸º120*120çš„å…¨1çŸ©é˜µ
+Acoustic_pressure(54:67,21:100) = Lead_Gruneisen_coefficient;  % é“…æ†åŒºåŸŸå¯†åº¦ä¸º11.3437åƒå…‹/ç«‹æ–¹ç±³
+Acoustic_pressure = Acoustic_pressure.* Density_matrix.* Dose; % å£°å‹åˆ†å¸ƒæƒ…å†µ
 
-% C = B(21:100,21:100); % È¡¾ØÕóÖĞ¼äµÄÊı¾İ£¬10cm x 10cm
-% B = reshape(B,[100,80]);B=B'; % ĞĞ×ª»»Îª¾ØÕó£¬¶ÔÓ¦Ä³Ò»¸ß¶ÈµÄ2D·øÉäÊı¾İ
-% C = B*1.6021892*1e-13*1e6*3600/(1.29*0.10*0.10*0.10);%(µ¥Î»¦ÌGy/h)
+% C = B(21:100,21:100); % å–çŸ©é˜µä¸­é—´çš„æ•°æ®ï¼Œ10cm x 10cm
+% B = reshape(B,[100,80]);B=B'; % è¡Œè½¬æ¢ä¸ºçŸ©é˜µï¼Œå¯¹åº”æŸä¸€é«˜åº¦çš„2Dè¾å°„æ•°æ®
+% C = B*1.6021892*1e-13*1e6*3600/(1.29*0.10*0.10*0.10);%(å•ä½Î¼Gy/h)
 
 figure % Energy-deposition distribution
 imagesc(A);
-colormap(parula);  % parula¡¢hot
-colorbar;  % É«½×
+colormap(parula);  % parulaã€hot
+colorbar;  % è‰²é˜¶
 set(gca,'xtick',0:10:120)
 set(gca,'ytick',0:10:120)
 set(gca,'XTickLabel',{'120','10','20','30','40','50','60','70','80','90','100','110'},'FontSize',10); % FontSize=25
@@ -43,12 +43,12 @@ set(gca,'YTickLabel',{'120','10','20','30','40','50','60','70','80','90','100','
 
 xlabel('X (Grid)','FontSize',10), ylabel('Y (Grid)','FontSize',10);
 h=colorbar;
-set(get(h,'Title'),'string','MeV'); % µ¥Î»
+set(get(h,'Title'),'string','MeV'); % å•ä½
 
 figure % 2D Dose-deposition distribution
 imagesc(Dose);
-colormap(parula);  % parula¡¢hot
-colorbar;  % É«½×
+colormap(parula);  % parulaã€hot
+colorbar;  % è‰²é˜¶
 set(gca,'xtick',0:10:120)
 set(gca,'ytick',0:10:120)
 set(gca,'XTickLabel',{'120','10','20','30','40','50','60','70','80','90','100','110'},'FontSize',10); % FontSize=25
@@ -56,18 +56,18 @@ set(gca,'YTickLabel',{'120','10','20','30','40','50','60','70','80','90','100','
 
 xlabel('X (Grid)','FontSize',10), ylabel('Y (Grid)','FontSize',10);
 h=colorbar;
-set(get(h,'Title'),'string','Gy'); % µ¥Î»
+set(get(h,'Title'),'string','Gy'); % å•ä½
 
 % figure % 3D Dose-deposition distribution
 % surfc(Dose)
 % xlabel('X (Grid)','FontSize',10), ylabel('Y (Grid)','FontSize',10),zlabel('Z (Dose deposition)','FontSize',10);
 % h=colorbar;
-% set(get(h,'Title'),'string','Gy'); % µ¥Î»
+% set(get(h,'Title'),'string','Gy'); % å•ä½
 
 figure % 2D Pression distribution
 imagesc(Acoustic_pressure);
-colormap(parula);  % parula¡¢hot
-colorbar;  %É«½×
+colormap(parula);  % parulaã€hot
+colorbar;  %è‰²é˜¶
 set(gca,'xtick',0:10:120)
 set(gca,'ytick',0:10:120)
 
@@ -77,12 +77,12 @@ set(gca,'YTickLabel',{'120','10','20','30','40','50','60','70','80','90','100','
 xlabel('X (Grid)','FontSize',10), ylabel('Y (Grid)','FontSize',10);
 % caxis([0 max(max(C))]) 
 h=colorbar;
-set(get(h,'Title'),'string','Pa'); % µ¥Î»
+set(get(h,'Title'),'string','Pa'); % å•ä½
 
 figure % 3D Pression distribution
 surfc(Acoustic_pressure)
 xlabel('X (Grid)','FontSize',10), ylabel('Y (Grid)','FontSize',10),zlabel('Z (XA signal pressure)','FontSize',10);
 h=colorbar;
-set(get(h,'Title'),'string','Pa'); % µ¥Î»
+set(get(h,'Title'),'string','Pa'); % å•ä½
 
 save('Acoustic_pressure','Acoustic_pressure')
