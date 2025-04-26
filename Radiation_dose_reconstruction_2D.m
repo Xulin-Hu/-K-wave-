@@ -33,7 +33,7 @@ clearvars;
 % =========================================================================
 load('Acoustic_pressure.mat')
 % create the computational grid
-PML_size = 10;          % size of the PML in grid points 2D:PML=20 3D:PML=10±ØĞëÒª£¬Ä¬ÈÏÉèÖÃ
+PML_size = 10;          % size of the PML in grid points 2D:PML=20 3D:PML=10
 Nx = 140 - 2*PML_size;  % number of grid points in the x (row) direction
 Ny = 140 - 2*PML_size;  % number of grid points in the y (column) direction
 dx = 2.5e-3;            % grid point spacing in the x direction [m]
@@ -48,7 +48,7 @@ medium.sound_speed = 1500;           % [m/s]
 source.p0 = Acoustic_pressure;
 
 % smooth the initial pressure distribution and restore the magnitude
-source.p0 = smooth(source.p0, true);  % Æ½»¬³õÊ¼ÉùÑ¹·Ö²¼¡ª¡ª¡ª¡ªWhy??
+source.p0 = smooth(source.p0, true);  % å¹³æ»‘åˆå§‹å£°å‹åˆ†å¸ƒâ€”â€”â€”â€”å¯ä»¥ä¸ç”¨è®¾ç½®
 
 % define a binary line sensor
 sensor.mask = zeros(Nx, Ny);
